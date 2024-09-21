@@ -5,10 +5,10 @@ This project uses WebdriverIO to run end-to-end tests on a web application.
 ## Getting Started
 
 To run the tests, make sure you have the necessary dependencies installed. You can do this by running:
-npm install
+$>npm install
 
 To run the tests, use the following command:
-npm run wdio
+$>npm run wdio
 This will execute the tests specified in the wdio.conf.js file.
 
 ## Test Structure
@@ -39,6 +39,26 @@ This project uses the following dependencies:
 
 # Babel Configuration
 The Babel configuration is located in babel.config.js. This file specifies the presets and targets for the project.
+
+# Allure reporting
+To use Allure reporting:
+$>npm install @wdio/allure-reporter --save-dev
+
+Include in wdio.conf.js file:
+reporters: [['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
+
+To install Allure comand line tool:
+$>npm i allure-commandline
+
+To check if Allure is installed:
+$>allure
+
+To generate report:
+$>allure generate allure-results && allure open
 
 # License
 This project is licensed under [insert license here].

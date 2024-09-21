@@ -8,8 +8,25 @@ describe('My Login application', () => {
 
         await LoginPage.login('tomsmith', 'SuperSecretPassword!')
         await expect(SecurePage.flashAlert).toBeExisting()
-        await expect(SecurePage.flashAlert).toHaveTextContaining(
-            'You logged into a secure area!')
+        await expect(SecurePage.flashAlert.containsText(
+            'You logged into a secure area!'))
+    })
+    // Intended to fail - for reporting demo purposes
+    it('should login with invalid username', async () => {
+        await LoginPage.open()
+
+        await LoginPage.login('123', 'SuperSecretPassword!')
+        await expect(SecurePage.flashAlert).toBeExisting()
+        await expect(SecurePage.flashAlert.containsText(
+            'Wrong message'))
+    })
+    it('should login with invalid credentials', async () => {
+        await LoginPage.open()
+
+        await LoginPage.login('tomsmith', '123!')
+        await expect(SecurePage.flashAlert).toBeExisting()
+        await expect(SecurePage.flashAlert.containsText(
+            'Your password is invalid!'))
     })
 })
 
